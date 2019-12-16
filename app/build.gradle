@@ -10,7 +10,7 @@ android {
         targetSdkVersion versions.targetSdk
         versionCode change.code
         versionName change.name
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         debug{

@@ -22,7 +22,6 @@ import android.text.TextUtils;
 
 import com.andrjhf.lib.jlogger.JLoggerConstant;
 import com.andrjhf.lib.jlogger.JLoggerWraper;
-import com.andrjhf.notification.api.compat.NotificationApiCompat;
 
 import org.json.JSONArray;
 
@@ -104,7 +103,6 @@ public class TodayStepService extends Service implements Handler.Callback {
     private TodayStepCounter mStepCounter;
 
     private NotificationManager nm;
-    private NotificationApiCompat mNotificationApiCompat;
 
     private boolean mSeparate = false;
     private boolean mBoot = false;
@@ -226,22 +224,6 @@ public class TodayStepService extends Service implements Handler.Callback {
         } else {
             largeIconBitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
         }
-        mNotificationApiCompat = new NotificationApiCompat.Builder(this,
-                nm,
-                STEP_CHANNEL_ID,
-                getString(R.string.step_channel_name),
-                smallIcon)
-                .setContentIntent(contentIntent)
-                .setContentText(contentText)
-                .setContentTitle(getString(R.string.title_notification_bar, String.valueOf(currentStep)))
-                .setTicker(getString(R.string.app_name))
-                .setOngoing(true)
-                .setPriority(Notification.PRIORITY_MIN)
-                .setLargeIcon(largeIconBitmap)
-                .setOnlyAlertOnce(true)
-                .builder();
-        mNotificationApiCompat.startForeground(this, NOTIFY_ID);
-        mNotificationApiCompat.notify(NOTIFY_ID);
 
     }
 
@@ -404,12 +386,12 @@ public class TodayStepService extends Service implements Handler.Callback {
      * 更新通知
      */
     private synchronized void updateNotification(int stepCount) {
-        if (null != mNotificationApiCompat) {
-            String km = getDistanceByStep(stepCount);
-            String calorie = getCalorieByStep(stepCount);
-            String contentText = calorie + " 千卡  " + km + " 公里";
-            mNotificationApiCompat.updateNotification(NOTIFY_ID, getString(R.string.title_notification_bar, String.valueOf(stepCount)), contentText);
-        }
+//        if (null != mNotificationApiCompat) {
+//            String km = getDistanceByStep(stepCount);
+//            String calorie = getCalorieByStep(stepCount);
+//            String contentText = calorie + " 千卡  " + km + " 公里";
+//            mNotificationApiCompat.updateNotification(NOTIFY_ID, getString(R.string.title_notification_bar, String.valueOf(stepCount)), contentText);
+//        }
     }
 
     private boolean getStepCounter() {
